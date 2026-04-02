@@ -1,6 +1,7 @@
 {
   "short_name": "CryptoChart",
   "name": "Crypto Chart Dashboard",
+  "description": "A powerful and intuitive cryptocurrency chart dashboard for tracking real-time market data.",
   "icons": [
     {
       "src": "https://picsum.photos/seed/crypto/192/192",
