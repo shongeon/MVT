@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MVT Crypto Dashboard</string>
+    <string name="title_activity_main">MVT Crypto Dashboard</string>
+    <string name="package_name">com.mvt.cryptodashboard</string>
+    <string name="custom_url_scheme">com.mvt.cryptodashboard</string>
+</resources>

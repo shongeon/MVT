@@ -1,0 +1,6 @@
+{
+	"appId": "com.mvt.cryptodashboard",
+	"appName": "MVT Crypto Dashboard",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

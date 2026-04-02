@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and premium status.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "isPremium": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "isPremium", "createdAt"]
+    },
+    "UserConfig": {
+      "title": "UserConfig",
+      "description": "User dashboard configuration.",
+      "type": "object",
+      "properties": {
+        "themeMode": { "type": "string" },
+        "gridCols": { "type": "number" },
+        "gridRows": { "type": "number" },
+        "totalCount": { "type": "number" },
+        "favorites": { "type": "array" },
+        "layouts": { "type": "array" },
+        "showHeader": { "type": "boolean" },
+        "isPremium": { "type": "boolean" },
+        "language": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["themeMode", "gridCols", "gridRows", "totalCount", "favorites", "layouts", "showHeader", "isPremium", "language", "updatedAt"]
+    },
+    "UserSlots": {
+      "title": "UserSlots",
+      "description": "User saved layout slots.",
+      "type": "object",
+      "properties": {
+        "slots": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["slots", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Stores user profile."
+    },
+    "/users/{userId}/settings/config": {
+      "schema": { "$ref": "#/entities/UserConfig" },
+      "description": "Stores user dashboard configuration."
+    },
+    "/users/{userId}/settings/slots": {
+      "schema": { "$ref": "#/entities/UserSlots" },
+      "description": "Stores user saved layout slots."
+    }
+  }
+}

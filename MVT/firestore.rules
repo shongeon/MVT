@@ -1,0 +1,133 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {userId}
+    // Fields:
+    //   - uid: string (required, immutable)
+    //   - email: string (required, immutable)
+    //   - isPremium: boolean (required)
+    //   - createdAt: string (required, immutable)
+    //
+    // Collection: users/{userId}/settings
+    // Document ID: config
+    // Fields:
+    //   - themeMode: string (required)
+    //   - gridCols: number (required)
+    //   - gridRows: number (required)
+    //   - totalCount: number (required)
+    //   - favorites: list (required)
+    //   - layouts: list (required)
+    //   - showHeader: boolean (required)
+    //   - isPremium: boolean (required)
+    //   - language: string (required)
+    //   - updatedAt: string (required)
+    //
+    // Document ID: slots
+    // Fields:
+    //   - slots: list (required)
+    //   - updatedAt: string (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function uidUnchanged() {
+      return !('uid' in request.resource.data) || request.resource.data.uid == request.auth.uid;
+    }
+
+    function uidNotModified() {
+      return !('uid' in request.resource.data) || request.resource.data.uid == resource.data.uid;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidDateString(dateStr) {
+      return dateStr is string && dateStr.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*Z?$");
+    }
+
+    function areImmutableFieldsUnchanged(fields) {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny(fields);
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+
+    function isValidUser(data) {
+      return hasRequiredFields(['uid', 'email', 'isPremium', 'createdAt']) &&
+             data.uid is string && data.uid.size() > 0 && data.uid.size() < 128 &&
+             isValidEmail(data.email) && data.email.size() < 256 &&
+             data.isPremium is bool &&
+             isValidDateString(data.createdAt);
+    }
+
+    function isValidUserUpdate(data) {
+      // Allow partial updates (like { isPremium: true })
+      return (!('uid' in data) || (data.uid is string && data.uid.size() > 0 && data.uid.size() < 128)) &&
+             (!('email' in data) || (isValidEmail(data.email) && data.email.size() < 256)) &&
+             (!('isPremium' in data) || data.isPremium is bool) &&
+             (!('createdAt' in data) || isValidDateString(data.createdAt));
+    }
+
+    function isValidConfig(data) {
+      return hasRequiredFields(['themeMode', 'gridCols', 'gridRows', 'totalCount', 'favorites', 'layouts', 'showHeader', 'isPremium', 'language', 'updatedAt']) &&
+             data.themeMode is string && data.themeMode.size() < 50 &&
+             data.gridCols is number && data.gridCols >= 1 && data.gridCols <= 10 &&
+             data.gridRows is number && data.gridRows >= 1 && data.gridRows <= 10 &&
+             data.totalCount is number && data.totalCount >= 1 && data.totalCount <= 100 &&
+             data.favorites is list && data.favorites.size() <= 100 &&
+             data.layouts is list && data.layouts.size() <= 100 &&
+             data.showHeader is bool &&
+             data.isPremium is bool &&
+             data.language is string && data.language.size() < 10 &&
+             isValidDateString(data.updatedAt);
+    }
+
+    function isValidSlots(data) {
+      return hasRequiredFields(['slots', 'updatedAt']) &&
+             data.slots is list && data.slots.size() <= 20 &&
+             isValidDateString(data.updatedAt);
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser(request.resource.data) && uidUnchanged();
+      allow update: if isOwner(userId) && isValidUserUpdate(request.resource.data) && uidNotModified() && areImmutableFieldsUnchanged(['createdAt', 'email']);
+      
+      match /settings/{docId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && (
+          (docId == 'config' && isValidConfig(request.resource.data)) ||
+          (docId == 'slots' && isValidSlots(request.resource.data))
+        );
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+export const THEMES = {
+  blue: {
+    id: 'blue', name: '네이비', appBg: 'bg-slate-950', text: 'text-slate-100', textMuted: 'text-slate-400',
+    headerBg: 'bg-slate-900', borderColor: 'border-slate-800', cardBg: 'bg-slate-900',
+    inputBg: 'bg-slate-950', buttonBg: 'bg-slate-800', buttonHover: 'hover:bg-slate-700',
+    modalBg: 'bg-slate-900', emptyIconBg: 'bg-slate-800', selectOptionBg: 'bg-slate-900',
+    chartBg: '#0f172a', chartGrid: '#1e293b', chartText: '#94a3b8',
+    accentText: 'text-indigo-500', accentTextLight: 'text-indigo-400', accentTextMuted: 'text-indigo-300',
+    accentBg: 'bg-indigo-600', hoverBg: 'hover:bg-indigo-600', accentBg80: 'bg-indigo-600/80',
+    handleBg: 'rgba(99, 102, 241, 0.1)', handleBar: 'bg-indigo-400/80',
+    logoGrad: 'from-indigo-500 to-cyan-500', resizerColor: 'rgba(99, 102, 241, 0.3)',
+    upColor: '#22c55e', downColor: '#ef4444', infoBg: 'bg-black/85', infoBorder: 'border-white/20', infoText: 'text-white',
+    optionBgHex: '#0f172a', optionTextHex: '#f1f5f9'
+  },
+  dark: {
+    id: 'dark', name: '다크', appBg: 'bg-black', text: 'text-zinc-100', textMuted: 'text-zinc-500',
+    headerBg: 'bg-zinc-950', borderColor: 'border-zinc-800', cardBg: 'bg-zinc-950',
+    inputBg: 'bg-zinc-900', buttonBg: 'bg-zinc-800', buttonHover: 'hover:bg-zinc-700',
+    modalBg: 'bg-zinc-900', emptyIconBg: 'bg-zinc-900', selectOptionBg: 'bg-zinc-900',
+    chartBg: '#000000', chartGrid: '#27272a', chartText: '#a1a1aa',
+    accentText: 'text-indigo-500', accentTextLight: 'text-indigo-400', accentTextMuted: 'text-indigo-300',
+    accentBg: 'bg-indigo-600', hoverBg: 'hover:bg-indigo-600', accentBg80: 'bg-indigo-600/80',
+    handleBg: 'rgba(99, 102, 241, 0.1)', handleBar: 'bg-indigo-400/80',
+    logoGrad: 'from-indigo-500 to-cyan-500', resizerColor: 'rgba(99, 102, 241, 0.3)',
+    upColor: '#22c55e', downColor: '#ef4444', infoBg: 'bg-black/90', infoBorder: 'border-zinc-800', infoText: 'text-white',
+    optionBgHex: '#18181b', optionTextHex: '#f4f4f5'
+  },
+  light: {
+    id: 'light', name: '화이트', appBg: 'bg-gray-100', text: 'text-gray-900', textMuted: 'text-gray-500',
+    headerBg: 'bg-white', borderColor: 'border-gray-300', cardBg: 'bg-white',
+    inputBg: 'bg-gray-50', buttonBg: 'bg-gray-200', buttonHover: 'hover:bg-gray-300',
+    modalBg: 'bg-white', emptyIconBg: 'bg-gray-100', selectOptionBg: 'bg-white',
+    chartBg: '#ffffff', chartGrid: '#e5e7eb', chartText: '#6b7280',
+    accentText: 'text-indigo-600', accentTextLight: 'text-indigo-500', accentTextMuted: 'text-indigo-400',
+    accentBg: 'bg-indigo-600', hoverBg: 'hover:bg-indigo-600', accentBg80: 'bg-indigo-600/80',
+    handleBg: 'rgba(99, 102, 241, 0.1)', handleBar: 'bg-indigo-500/80',
+    logoGrad: 'from-indigo-600 to-cyan-600', resizerColor: 'rgba(99, 102, 241, 0.3)',
+    upColor: '#22c55e', downColor: '#ef4444', infoBg: 'bg-white/90', infoBorder: 'border-gray-200', infoText: 'text-slate-900',
+    optionBgHex: '#ffffff', optionTextHex: '#111827'
+  },
+  sunset: {
+    id: 'sunset', name: '선셋 (Sunset)', appBg: 'bg-[#e8e4d9]', text: 'text-[#f5f1e7]', textMuted: 'text-[#92a6b0]',
+    headerBg: 'bg-[#2f4049]', borderColor: 'border-[#455a64]', cardBg: 'bg-[#2f4049]',
+    inputBg: 'bg-[#1e2b32]', buttonBg: 'bg-[#455a64]', buttonHover: 'hover:bg-[#546e7a]',
+    modalBg: 'bg-[#2f4049]', emptyIconBg: 'bg-[#1e2b32]', selectOptionBg: 'bg-[#2f4049]',
+    chartBg: '#2f4049', chartGrid: '#455a64', chartText: '#92a6b0',
+    accentText: 'text-[#e06d53]', accentTextLight: 'text-[#e88a75]', accentTextMuted: 'text-[#e88a75]/70',
+    accentBg: 'bg-[#e06d53]', hoverBg: 'hover:bg-[#e06d53]', accentBg80: 'bg-[#e06d53]/80',
+    handleBg: 'rgba(224, 109, 83, 0.1)', handleBar: 'bg-[#e06d53]/80',
+    logoGrad: 'from-[#e06d53] to-[#e8a375]', resizerColor: 'rgba(224, 109, 83, 0.3)',
+    upColor: '#e06d53', downColor: '#1e2b32', infoBg: 'bg-[#1e2b32]/90', infoBorder: 'border-[#455a64]', infoText: 'text-[#f5f1e7]',
+    optionBgHex: '#2f4049', optionTextHex: '#f5f1e7'
+  },
+  glass: {
+    id: 'glass', name: '리퀴드 글래스 (Liquid Glass)', 
+    appBg: 'bg-gradient-to-br from-[#f8ece5] via-[#eaddd3] to-[#c9d1d5]', 
+    text: 'text-slate-800', textMuted: 'text-slate-500',
+    headerBg: 'bg-white/30 backdrop-blur-2xl', borderColor: 'border-white/50', 
+    cardBg: 'bg-white/30 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(100,100,111,0.15)]',
+    inputBg: 'bg-white/40', buttonBg: 'bg-white/40', buttonHover: 'hover:bg-white/60',
+    modalBg: 'bg-[#f8ece5]/95 backdrop-blur-3xl', emptyIconBg: 'bg-white/30', selectOptionBg: 'bg-white',
+    chartBg: 'transparent', chartGrid: 'rgba(0,0,0,0.04)', chartText: '#64748b',
+    accentText: 'text-[#e06d53]', accentTextLight: 'text-[#e88a75]', accentTextMuted: 'text-[#e88a75]/70',
+    accentBg: 'bg-[#e06d53]', hoverBg: 'hover:bg-[#e06d53]', accentBg80: 'bg-[#e06d53]/80',
+    handleBg: 'rgba(224, 109, 83, 0.1)', handleBar: 'bg-[#e06d53]/80',
+    logoGrad: 'from-[#e06d53] to-[#e8a375]', resizerColor: 'rgba(224, 109, 83, 0.3)',
+    upColor: '#e06d53', downColor: '#2f4049',
+    infoBg: 'bg-white/40', infoBorder: 'border-white/60', infoText: 'text-slate-800',
+    optionBgHex: '#ffffff', optionTextHex: '#1e293b'
+  }
+};
