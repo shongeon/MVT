@@ -4,17 +4,19 @@
   "description": "A powerful and intuitive cryptocurrency chart dashboard for tracking real-time market data.",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/crypto/192/192",
+      "src": "/icon-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "https://picsum.photos/seed/crypto/512/512",
+      "src": "/icon-512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
